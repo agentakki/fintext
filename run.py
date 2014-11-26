@@ -1,5 +1,6 @@
 from flask import Flask, request, redirect
 import twilio.twiml
+
  
 app = Flask(__name__)
 
@@ -8,7 +9,7 @@ callers = {
     "+14803820676" : "Harrison",
 }
  
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/incoming", methods=['GET', 'POST'])
 def hello_monkey():
     """Respond to incoming text by name."""
 
@@ -18,7 +19,7 @@ def hello_monkey():
         from_body = ""
 
     if from_number in callers:
-        message = callers[from_number] + ", thanks for the message!" + "Your message was " + from_body
+        message = callers[from_number] + ", thanks for the message! Your message was: " + from_body
 
     else:
         message = "Thanks for the message, human. Your message was: " + from_body
